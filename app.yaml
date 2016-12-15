@@ -8,3 +8,4 @@ handlers:
   static_dir: public
 - url: /.*
   script: _go_app
+  
