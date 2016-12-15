@@ -1,0 +1,48 @@
+td{
+    text-align: center;
+    font-size: 17px;
+    width: 100px;
+}
+
+
+tbody > tr:nth-child(odd) {background: #e5e5e5}
+
+thead >tr{
+    background: #4CAF50;
+    color: #f7f7f7;
+}
+
+table{
+    border-collapse: collapse;
+    
+    margin: 5px auto;
+    width: 938px;
+    -webkit-transition: width 2s;
+    transition: width 2s;
+}
+
+#container{
+    width: 1000px;
+    -webkit-transition: width 2s;
+    transition: width 2s;
+}
+
+
+table, td, th {
+    border: 1px solid #b1b1b1;
+}
+
+
+@media screen and (max-width: 990px) {
+    table{
+        width: 638px;
+        -webkit-transition: width 2s;
+        transition: width 2s;
+    }
+    
+    #container{
+        width: 700px;
+        -webkit-transition: width 2s;
+        transition: width 2s;
+    }
+}
