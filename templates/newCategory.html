@@ -1,4 +1,4 @@
-{{define "newCategory"}}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +11,28 @@
 <body>
     
     <div id="container">
+
+         <nav class = "sidebarContainer">
+
+            <ul class = "sidebar">
+                <div class="profile">
+                    <div class="ico"></div>
+                    {{if .LoggedIn}}
+                    <div class="profileName"><p>{{.UserName}}</p></div>
+                    {{end}}
+                    <div class="clearfix"></div>
+                </div>
+
+                <li><a href="/" class="siede-link">Start</a></li>
+                    <li><a href="/" class="siede-link">Wydatki</a></li>
+                    <li><a href="/new/category" class="siede-link">Kategoria</a></li>
+                    <li><a href="/" class="siede-link">Podsumowanie</a></li>
+                    <li><a href="/user/logout" class="siede-link">Wyloguj się</a></li>
+
+            </ul>
+
+    </nav>
+
         <div class="user" >
             <h1>Nowy</h1>
             <form method="post" action="/category/create">
@@ -27,5 +49,3 @@
 </body>
 
 </html>
-
-{{end}}

@@ -10,7 +10,7 @@ import (
 var t *template.Template
 
 func init() {
-	t = template.Must(template.New("").ParseGlob("templates/*.html"))
+	t = template.Must(t.ParseGlob("templates/*.html"))
 	router := httprouter.New()
 	http.Handle("/", router)
 

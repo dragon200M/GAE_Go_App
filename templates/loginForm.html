@@ -1,15 +1,24 @@
-{{define "loginForm"}}<!DOCTYPE html>
-<html>
-<head>
-    <title>Logowanie</title>
-    <meta charset="utf-8"/>
-    <link href="../public/style/style.css" rel="stylesheet" type="text/css">
-    <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
-</head>
+{{template "header"}}
 <body>
     
     <div id="container">
+
+        <nav class = "sidebarContainer">
+
+            <ul class = "sidebar">
+                <div class="profile">
+                    <div class="ico"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <li><a href="/" class="siede-link">Start</a></li>
+                    <li><a href="/new/adduser" class="siede-link">Załóż konto</a></li>
+                    <li><a href="/new/login" class="siede-link">Logowanie</a></li>
+
+            </ul>
+
+        </nav>
+
         <div class="user">
             <h1>Logowanie</h1>
             <form method="post" action="/user/login">
@@ -28,4 +37,3 @@
 </body>
 
 </html>
-{{end}}

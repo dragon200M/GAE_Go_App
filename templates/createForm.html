@@ -1,20 +1,30 @@
-{{define "createForm"}}<!DOCTYPE html>
-<html>
-<head>
-    <title>Nowy użytkownik</title>
-    <meta charset="utf-8"/>
-    <link href="../public/style/style.css" rel="stylesheet" type="text/css">
-    <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
-</head>
+{{template "header"}}
 <body>
     
     <div id="container">
+
+         <nav class = "sidebarContainer">
+
+            <ul class = "sidebar">
+                <div class="profile">
+                    <div class="ico"></div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <li><a href="/" >Start</a></li>
+                    <li><a href="/new/adduser" ">Załóż konto</a></li>
+                    <li><a href="/new/login" >Logowanie</a></li>
+
+            </ul>
+
+        </nav>
+
+
         <div class="user">
             <h1>Nowy użytkownik</h1>
             <form method="post" action="/user/create">
 
-                 <input type="text" name="email" placeholder="Podaj email"/>
+                <input type="text" name="email" placeholder="Podaj email"/>
                 <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
                 <input type="password" name="password" placeholder="Podaj hasło"/>
 
@@ -29,4 +39,3 @@
 </body>
 
 </html>
-{{end}}

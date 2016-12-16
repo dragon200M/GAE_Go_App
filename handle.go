@@ -24,15 +24,15 @@ func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 		json.Unmarshal(memItem.Value, &sd)
 		sd.LoggedIn = true
 	}
-	t.ExecuteTemplate(res, "index", &sd)
+	t.ExecuteTemplate(res, "index.html", &sd)
 }
 
 func addUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	getTemplate(res, req, "createForm")
+	getTemplate(res, req, "createForm.html")
 }
 
 func loginUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	getTemplate(res, req, "loginForm")
+	getTemplate(res, req, "loginForm.html")
 }
 
 func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -83,7 +83,7 @@ func loginUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 		var session SessionData
 		session.LoginFail = true
 
-		t.ExecuteTemplate(res, "loginForm", session)
+		t.ExecuteTemplate(res, "loginForm.html", session)
 	} else {
 
 		usr.UserName = req.FormValue("user")
@@ -125,7 +125,7 @@ func addCategoryForm(res http.ResponseWriter, req *http.Request, _ httprouter.Pa
 	_ , err := getSession(req)
 
 	if err == nil {
-		getTemplate(res, req, "newCategory")
+		getTemplate(res, req, "newCategory.html")
 
 	}
 
