@@ -120,7 +120,22 @@ func logoutUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params)
 }
 
 func addCategoryForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	getTemplate(res, req, "newCategory")
+	ctx := appengine.NewContext(req)
+
+	_ , err := getSession(req)
+
+	if err == nil {
+		getTemplate(res, req, "newCategory")
+
+	}
+	
+	if err != nil {
+		log.Infof(ctx, "You must be logged in")
+		http.Error(res, "You must be logged in", http.StatusForbidden)
+		return
+	}
+
+
 }
 
 func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
