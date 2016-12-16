@@ -1,0 +1,31 @@
+{{define "newCategory"}}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj Kategorię</title>
+    <meta charset="utf-8"/>
+    <link href="../public/style/style.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
+</head>
+<body>
+    
+    <div id="container">
+        <div class="user" >
+            <h1>Nowy</h1>
+            <form method="post" action="/category/create">
+                <input type="text" name="name" placeholder="Podaj nazwę"/>
+                <input type="text" name="description" placeholder="Opis"/>
+            
+                <button type="submit">Zapisz</button>
+            </form>
+        
+        </div>
+    
+    </div>
+    
+</body>
+
+</html>
+
+{{end}}
