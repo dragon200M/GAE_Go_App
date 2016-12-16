@@ -11,11 +11,8 @@ import (
 	"google.golang.org/appengine/datastore"
 )
 
-
-
 func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	var sd SessionData
-
 
 	memItem, err := getSession(req)
 
@@ -27,24 +24,18 @@ func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 	t.ExecuteTemplate(res, "index", &sd)
 }
 
-
-
-
-
 func addUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	getTemplate(res, req, "createForm")
 }
 
-
-
 func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	ctx := appengine.NewContext(req)
 
-	passHash, err := bcrypt.GenerateFromPassword([]byte(req.FormValue("password")),bcrypt.MinCost)
+	passHash, err := bcrypt.GenerateFromPassword([]byte(req.FormValue("password")), bcrypt.MinCost)
 
 	if err != nil {
-		log.Errorf(ctx,"password err: %v",err)
-		http.Error(res,err.Error(),500)
+		log.Errorf(ctx, "password err: %v", err)
+		http.Error(res, err.Error(), 500)
 		return
 	}
 
@@ -55,20 +46,18 @@ func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	}
 
+	key := datastore.NewKey(ctx, "user", usr.UserName, 0, nil)
 
-	key := datastore.NewKey(ctx,"user",usr.UserName,0,nil)
+	key, err = datastore.Put(ctx, key, &usr)
 
-	key, err = datastore.Put(ctx,key, &usr)
-
-	if err !=nil{
-		log.Errorf(ctx,"user adding err: %v",err)
-		http.Error(res,err.Error(),500)
+	if err != nil {
+		log.Errorf(ctx, "user adding err: %v", err)
+		http.Error(res, err.Error(), 500)
 		return
 
 	}
 
-	newSession(res,req,usr)
+	newSession(res, req, usr)
 	http.Redirect(res, req, "/", 302)
-
 
 }
