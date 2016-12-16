@@ -1,25 +1,62 @@
-{{define "index"}}<!DOCTYPE html>
+
+
+{{define "index"}}
+<!DOCTYPE html>
 <html>
 <head>
     <title>Logowanie</title>
     <meta charset="utf-8"/>
-    <link href="public/style/style.css" rel="stylesheet" type="text/css">
-    <link href="public/style/addUser.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/style.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/clock.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-    {{if .LoggedIn}}
-        <a href="/user/logout"><p class="loginbtn">Wyloguj się</p></a>
-        <p>{{.UserName}}</p>
-    {{else}}
-        <a href="/new/login"><p  class="loginbtn">Logowanie</p></a>
-        <a href="/new/adduser"><p  class="loginbtn">Załóż konto</p></a>
-    {{end}}
+
     <div id="container">
-        <h1>Welcome</h1>
+
+            <div class="clock">
+                <div id="Date"></div>
+                <ul>
+                    <li id="hours"></li>
+                    <li id="point">:</li>
+                    <li id="min"></li>
+                    <li id="point">:</li>
+                    <li id="sec"></li>
+                </ul>
+            </div>
+
+
+        <nav class = "sidebarContainer">
+
+            <ul class = "sidebar">
+                <div class="profile">
+                    <div class="ico"></div>
+                    {{if .LoggedIn}}
+                    <div class="profileName"><p>{{.UserName}}</p></div>
+                    {{end}}
+                    <div class="clearfix"></div>
+                </div>
+
+                <li><a href="/" class="siede-link">Start</a></li>
+                {{if .LoggedIn}}
+                    <li><a href="/" class="siede-link">Wydatki</a></li>
+                    <li><a href="/" class="siede-link">Kategoria</a></li>
+                    <li><a href="/" class="siede-link">Podsumowanie</a></li>
+                    <li><a href="/user/logout" class="siede-link">Wyloguj się</a></li>
+                {{else}}
+                    <li><a href="/new/adduser" class="siede-link">Załóż konto</a></li>
+                    <li><a href="/new/login" class="siede-link">Logowanie</a></li>
+                {{end}}
+            </ul>
+
+
+        </nav>
+
 
     </div>
-    
+    <script src="../public/script/script.js" type="text/javascript"></script>
 </body>
 
 </html>

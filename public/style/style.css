@@ -5,7 +5,7 @@ body{
     margin: 0;
     font-family: 'Lato', sans-serif;
     font-size:  20px;
-    
+    letter-spacing: 1px;
     
 }
 
@@ -70,13 +70,13 @@ button{
     margin-left: 10px;
     margin-top: 30px;
     border-radius: 4px;
-    border: 1px solid rgb(0, 140, 242);
+    border: 1px solid rgba(76, 175, 80, 0.86);
     font-family: 'Lato', sans-serif;
-    font-size:  17px;
+    font-size:  15px;
     font-weight: bold;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     color: #f7f7f7;
-    background-color: rgb(0, 140, 242)
+    background-color: #4CAF50;
     
 }
 select{
@@ -92,3 +92,90 @@ select{
     
 }
 
+.sidebarContainer{
+    position: fixed;
+    top:0;
+    left:0;
+    
+    z-index: 1050;
+    
+    display: block;
+    border-right: 1px solid #29313b;
+    -webkit-box-shadow: 3px 1px 9px -1px rgba(52, 62, 75, 0.85);
+    -moz-box-shadow:    3px 1px 9px -1px rgba(52, 62, 75, 0.85);
+    box-shadow:         3px 1px 9px -1px rgba(52, 62, 75, 0.85);
+    
+}
+
+.sidebar{
+    position: absolute;
+    top:0;
+    left: 0;
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 0px;
+    background: rgb(52, 62, 75);
+    box-sizing: border-box;
+    font-size: 14px;
+   
+    list-style: none;
+}
+
+ .sidebar > li >a{
+    font-size: 14px;
+    color: #ffffff;
+    display: block;
+    padding:  0.5em 0em 0.5em 10px;
+    text-decoration: none;
+   
+}
+
+.sidebarContainer,  .sidebar{
+    width: 155px;
+    height: 100%;
+}
+
+.sidebar > li {
+    
+    margin: 10px 0px;
+    color: white;
+}
+.sidebar > li:hover{
+    background: #4CAF50;
+    
+}
+
+.sidebar >li:nth-last-child(1){
+   position: absolute;
+    bottom:32px;
+    right: 0px;
+    left: 0px;
+    
+
+}
+
+.ico{
+    height: 40px;
+    width: 40px;
+    background: url(../img/profle.png);
+    background-size: 40px 40px;
+    float: left;
+
+}
+
+.profile{
+   padding-left: 10px;
+    color: white;
+    
+}
+
+.profileName{
+    float: left;
+    margin-left: 5px;
+    padding-right: 2px;
+    word-wrap:break-word;
+    max-width:100%;
+}
+.clearfix{
+    clear: both;
+}

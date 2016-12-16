@@ -128,7 +128,7 @@ func addCategoryForm(res http.ResponseWriter, req *http.Request, _ httprouter.Pa
 		getTemplate(res, req, "newCategory")
 
 	}
-	
+
 	if err != nil {
 		log.Infof(ctx, "You must be logged in")
 		http.Error(res, "You must be logged in", http.StatusForbidden)
