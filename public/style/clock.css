@@ -1,0 +1,30 @@
+.clock{
+    background: #4CAF50;
+    padding: 20px;
+    border: 2px solid rgba(76, 175, 80, 0.86);
+    border-radius: 5px;
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 3px;
+    
+    -webkit-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
+    -moz-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
+    box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
+}
+#Date{
+    font-size: 35px;
+    font-weight: bold;
+    
+}
+
+.clock > ul {
+    list-style: none;
+    padding: 0;
+    
+}
+
+.clock > ul >li{
+    display: inline;
+}
+                
