@@ -8,12 +8,14 @@ import (
 	"google.golang.org/appengine"
 )
 
+const CookieName string =  "session"
+
 func newSession(res http.ResponseWriter, req *http.Request, usr User) {
 	ctx := appengine.NewContext(req)
 
 	id, _ := uuid.NewV4()
 	cookie := &http.Cookie{
-		Name:  "session",
+		Name:  CookieName,
 		Value: id.String(),
 		Path:  "/",
 		MaxAge: 60 * 10,
@@ -53,7 +55,7 @@ func getTemplate(res http.ResponseWriter, req *http.Request, templateName string
 func getSession(req *http.Request) (*memcache.Item, error) {
 	ctx := appengine.NewContext(req)
 
-	cookie, err := req.Cookie("session")
+	cookie, err := req.Cookie(CookieName)
 	if err != nil {
 		return &memcache.Item{}, err
 	}

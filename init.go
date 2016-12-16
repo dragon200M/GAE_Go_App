@@ -19,5 +19,6 @@ func init() {
 	router.GET("/new/login", loginUserForm)
 	router.POST("/user/create", newUser)
 	router.POST("/user/login", loginUser)
+	router.GET("/user/logout",logoutUser)
 
 }

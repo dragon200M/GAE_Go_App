@@ -9,7 +9,9 @@ import (
 
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/datastore"
-	"fmt"
+
+	"google.golang.org/appengine/memcache"
+	"time"
 )
 
 func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -102,3 +104,33 @@ func loginUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 
 
 }
+
+
+func logoutUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params){
+	ctx := appengine.NewContext(req)
+
+	cookie, err := req.Cookie(CookieName)
+
+
+
+	if err != nil {
+		http.Redirect(res, req, "/", 302)
+		return
+	}
+
+
+	session := memcache.Item{
+		Key:        cookie.Value,
+		Value:      []byte(""),
+		Expiration: time.Duration(1 * time.Microsecond),
+	}
+	memcache.Set(ctx, &session)
+
+
+	cookie.MaxAge = -1
+	http.SetCookie(res, cookie)
+
+	http.Redirect(res, req, "/", 302)
+
+}
+
