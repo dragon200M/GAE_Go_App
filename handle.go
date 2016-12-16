@@ -9,6 +9,7 @@ import (
 
 	"google.golang.org/appengine/log"
 	"google.golang.org/appengine/datastore"
+	"fmt"
 )
 
 func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -26,6 +27,11 @@ func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 func addUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	getTemplate(res, req, "createForm")
+}
+
+
+func loginUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	getTemplate(res, req, "loginForm")
 }
 
 func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -57,7 +63,42 @@ func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	}
 
+
+
+
 	newSession(res, req, usr)
 	http.Redirect(res, req, "/", 302)
+
+
+}
+
+
+
+
+func loginUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	ctx := appengine.NewContext(req)
+
+	key :=datastore.NewKey(ctx,"user",req.FormValue("user"),0,nil)
+
+	var usr User
+
+	err := datastore.Get(ctx,key,&usr)
+
+	if err != nil || bcrypt.CompareHashAndPassword([]byte(usr.Password),[]byte(req.FormValue("password"))) != nil{
+
+		var session SessionData
+		session.LoginFail = true
+
+		t.ExecuteTemplate(res, "loginForm", session)
+	}else{
+
+		usr.UserName =req.FormValue("user")
+		newSession(res,req,usr)
+
+		http.Redirect(res, req, "/", 302)
+
+	}
+
+
 
 }

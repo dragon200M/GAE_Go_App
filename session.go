@@ -8,7 +8,6 @@ import (
 	"google.golang.org/appengine"
 )
 
-
 func newSession(res http.ResponseWriter, req *http.Request, usr User) {
 	ctx := appengine.NewContext(req)
 
@@ -21,7 +20,6 @@ func newSession(res http.ResponseWriter, req *http.Request, usr User) {
 
 	}
 	http.SetCookie(res, cookie)
-
 
 	json, err := json.Marshal(usr)
 	if err != nil {
@@ -37,21 +35,15 @@ func newSession(res http.ResponseWriter, req *http.Request, usr User) {
 	memcache.Set(ctx, &sd)
 }
 
-
-
-
-
-
-
 func getTemplate(res http.ResponseWriter, req *http.Request, templateName string) {
 	memItem, err := getSession(req)
 
 	if err != nil {
-		// not logged in
+
 		t.ExecuteTemplate(res, templateName, SessionData{})
 		return
 	}
-	// logged in
+
 	var sd SessionData
 	json.Unmarshal(memItem.Value, &sd)
 	sd.LoggedIn = true
