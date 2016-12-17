@@ -1,0 +1,24 @@
+.table{
+    float: left;
+    margin-left: 20px;
+    width: 300px;
+    
+    
+}
+td{
+    max-width:180px;
+    word-wrap: break-word;
+}
+.user{
+    float: left;
+    
+}
+
+#container{
+    margin-left: 200px;
+}
+
+table{
+    width: 300px;
+    margin: 0px;
+}

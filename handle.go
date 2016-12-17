@@ -12,6 +12,7 @@ import (
 
 	"google.golang.org/appengine/memcache"
 	"time"
+	"strings"
 )
 
 func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -28,51 +29,20 @@ func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 }
 
 func addUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	getTemplate(res, req, "createForm.html")
+	//getTemplate(res, req, "newUserForm.html")
+	t.ExecuteTemplate(res, "newUserForm.html", "")
 }
 
 func loginUserForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	getTemplate(res, req, "loginForm.html")
 }
 
-func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	ctx := appengine.NewContext(req)
 
-	passHash, err := bcrypt.GenerateFromPassword([]byte(req.FormValue("password")), bcrypt.MinCost)
-
-	if err != nil {
-		log.Errorf(ctx, "password err: %v", err)
-		http.Error(res, err.Error(), 500)
-		return
-	}
-
-	usr := User{
-		Email: req.FormValue("email"),
-		UserName: req.FormValue("user"),
-		Password: string(passHash),
-
-	}
-
-	key := datastore.NewKey(ctx, "user", usr.UserName, 0, nil)
-
-	key, err = datastore.Put(ctx, key, &usr)
-
-	if err != nil {
-		log.Errorf(ctx, "user adding err: %v", err)
-		http.Error(res, err.Error(), 500)
-		return
-
-	}
-
-	newSession(res, req, usr)
-	http.Redirect(res, req, "/", 302)
-
-}
 
 func loginUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	ctx := appengine.NewContext(req)
 
-	key := datastore.NewKey(ctx, "user", req.FormValue("user"), 0, nil)
+	key := datastore.NewKey(ctx, userKey, req.FormValue("user"), 0, nil)
 
 	var usr User
 
@@ -122,10 +92,17 @@ func logoutUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params)
 func addCategoryForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	ctx := appengine.NewContext(req)
 
-	_ , err := getSession(req)
+
+	memitem , err := getSession(req)
+
+	var usr User
+	json.Unmarshal(memitem.Value, &usr)
 
 	if err == nil {
-		getTemplate(res, req, "newCategory.html")
+		cat,_ := getCategory(req,&usr)
+
+
+		t.ExecuteTemplate(res,"newCategory.html", cat)
 
 	}
 
@@ -151,21 +128,30 @@ func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 	var usr User
 	json.Unmarshal(memItem.Value, &usr)
 
-	category := Category{
-		Name: req.FormValue("name"),
-		Description: req.FormValue("description"),
 
+	nameValue := req.FormValue("name")
+
+	if len(nameValue) > 0{
+
+		nameValue = strings.Title(nameValue)
+
+
+		category := Category{
+			Name: nameValue,
+			Description: req.FormValue("description"),
+
+		}
+
+		err = putCategory(req, &usr, &category)
+
+		if err != nil {
+			log.Errorf(ctx, "category adding err: %v", err)
+			http.Error(res, err.Error(), 500)
+			return
+
+		}
 	}
 
-	err = putCategory(req, &usr, &category)
-
-	if err != nil {
-		log.Errorf(ctx, "category adding err: %v", err)
-		http.Error(res, err.Error(), 500)
-		return
-
-	}
-
-	http.Redirect(res, req, "/", 302)
+	http.Redirect(res, req, "/new/category", 302)
 
 }

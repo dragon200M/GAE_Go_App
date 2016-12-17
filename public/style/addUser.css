@@ -1,9 +1,5 @@
 .user{
-    background-color: #fafafa;
-    margin: 15px auto;
-    padding: 10px;
-    border: 1px solid #b1b1b1;
-    border-radius: 4px;
+    
     
     -webkit-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
     -moz-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
@@ -12,6 +8,15 @@
     width: 250px;
 }
 
+
+.usr{
+    background-color: #fafafa;
+    margin: 15px auto;
+    padding: 10px;
+    border: 1px solid #b1b1b1;
+    border-radius: 4px;
+    
+}
 
 input[type=text]{
     width: 220px;

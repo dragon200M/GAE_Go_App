@@ -6,6 +6,8 @@
     <meta charset="utf-8"/>
     <link href="../public/style/style.css" rel="stylesheet" type="text/css">
     <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/table.css" rel="stylesheet" type="text/css">
+    <link href="../public/style/summary.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
 </head>
 <body>
@@ -17,9 +19,7 @@
             <ul class = "sidebar">
                 <div class="profile">
                     <div class="ico"></div>
-                    {{if .LoggedIn}}
-                    <div class="profileName"><p>{{.UserName}}</p></div>
-                    {{end}}
+
                     <div class="clearfix"></div>
                 </div>
 
@@ -33,17 +33,48 @@
 
     </nav>
 
-        <div class="user" >
+
+        <div class="user usr">
             <h1>Nowy</h1>
             <form method="post" action="/category/create">
-                <input type="text" name="name" placeholder="Podaj nazwę"/>
+                <input type="text" name="name" placeholder="Podaj podaje nazwę"/>
                 <input type="text" name="description" placeholder="Opis"/>
-            
+
                 <button type="submit">Zapisz</button>
             </form>
-        
+
         </div>
-    
+
+         <div class="table usr">
+
+                <table>
+                    <thead>
+                        <tr >
+                            <th>Kategoria</th>
+                            <th>Opis</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {{range .}}
+                        <tr>
+                            <td>{{ .Name}}</td>
+                            <td>{{ .Description}}</td>
+                        </tr>
+                    {{end}}
+
+
+                    </tbody>
+
+                </table>
+
+
+        </div>
+        <div class="clearfix"></div>
+
+
     </div>
     
 </body>

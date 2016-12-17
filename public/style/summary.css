@@ -3,9 +3,11 @@ th, td {
     font-size: 15px;
     text-align: center;
     padding: 10px 5px 10px 5px;
-    width: 60px;
+
     
 }
+
+
 
 tbody > tr:nth-child(odd) {
     background: #e5e5e5}
@@ -18,32 +20,21 @@ thead >tr{
 table{
     border-collapse: collapse;
     
-    margin: 5px auto;
-    width: 938px;
-    -webkit-transition: width 2s;
-    transition: width 2s;
+    
+ 
+    
+}
+.twidth{
+   width: 938px; 
+   margin: 5px auto;
+
 }
 
 #container{
 
     width: 1000px;
-    -webkit-transition: width 2s;
-    transition: width 2s;
 }
 
-.sidebarContainer,  .sidebar{
-        -webkit-transition: width 2s;
-        transition: width 2s;
-}
-
-.sidebar > li > a{
-        -webkit-transition: font-size 5s;
-        transition: font-size 5s;
-        
-        -webkit-transition: padding 1s;
-        transition: padding 1s;
-        
-    }
 
 
 
@@ -52,93 +43,3 @@ table, td, th {
     border: 1px solid #b1b1b1;
 }
 
-@media screen and (max-width: 1300px) {
-    #container{
-        margin-left: 140px;
-    }
-    
-    .sidebar > li >a{
-        font-size: 12px;
-        letter-spacing: 0px;
-        padding-left: 7px;
-        
-        -webkit-transition: padding 1s;
-        transition: padding 1s;
-        
-        -webkit-transition: font-size 1s;
-        transition: font-size 1s;
-        
-    }
-    
-    .sidebarContainer,  .sidebar{
-        width: 130px;
-        -webkit-transition: width 1s;
-        transition: width 1s;
-        
-        
-    }
-}
-
-
-@media screen and (max-width: 1120px) {
-    table{
-        width: 638px;
-        -webkit-transition: width 1s;
-        transition: width 1s;
-    }
-    
-    #container{
-        width: 700px;
-        margin-left: 75px;
-        -webkit-transition: width 1s;
-        transition: width 1s;
-    }
-    
-    th, td{
-        
-        text-align: center;
-        font-size: 12px;
-        width: 40px;
-        padding:  5px 0px 5px 0px;
-        
-        -webkit-transition: width 2s;
-        transition: width 2s;
-    }
-    
-    .sidebarContainer,  .sidebar{
-        width: 100px;
-        -webkit-transition: width 1s;
-        transition: width 1s;
-        
-        
-    }
-    .sidebar > li >a{
-        font-size: 10px;
-        letter-spacing: 0px;
-        padding-left: 10px;
-        
-        -webkit-transition: padding 1s;
-        transition: padding 1s;
-        
-        -webkit-transition: font-size 1s;
-        transition: font-size 1s;
-        
-    }
-    
-    .profileName{
-        font-size: 10px;
-}
-
-    
-    .ico{
-        height: 25px;
-        width: 25px;
-        background-size: 25px 25px;
-        float: left;
-        
-        -webkit-transition: height 1s,width 1s, background-size 1s ;
-        transition: height 1s,width 1s, background-size 1s ;
-    
-}
-
-}
