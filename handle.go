@@ -91,24 +91,27 @@ func logoutUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 func addCategoryForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	ctx := appengine.NewContext(req)
-
-
+	var catdata CategoryData
+	var usr User
 	memitem , err := getSession(req)
 
-	var usr User
+
 	json.Unmarshal(memitem.Value, &usr)
 
 	if err == nil {
 		cat,_ := getCategory(req,&usr)
 
+		catdata.User = 	usr
+		catdata.Categories = cat
 
-		t.ExecuteTemplate(res,"newCategory.html", cat)
+		t.ExecuteTemplate(res,"newCategory.html", catdata)
 
 	}
 
 	if err != nil {
 		log.Infof(ctx, "You must be logged in")
-		http.Error(res, "You must be logged in", http.StatusForbidden)
+		//http.Error(res, "You must be logged in", http.StatusForbidden)
+		http.Redirect(res, req, "/new/login", 302)
 		return
 	}
 
@@ -121,9 +124,12 @@ func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 	if err != nil {
 		log.Infof(ctx, "You must be logged in")
-		http.Error(res, "You must be logged in", http.StatusForbidden)
+
+
 		return
 	}
+
+
 
 	var usr User
 	json.Unmarshal(memItem.Value, &usr)
@@ -154,4 +160,43 @@ func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 	http.Redirect(res, req, "/new/category", 302)
 
+}
+
+
+func deleteCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+
+	ctx := appengine.NewContext(req)
+	memItem, err := getSession(req)
+
+	if err != nil {
+		log.Infof(ctx, "You must be logged in")
+		http.Error(res, "You must be logged in", http.StatusForbidden)
+
+		return
+	}
+
+
+
+	var usr User
+	json.Unmarshal(memItem.Value, &usr)
+
+
+	nameValue := req.FormValue("delname")
+
+	if len(nameValue) > 0{
+
+		nameValue = strings.Title(nameValue)
+
+		err2 := delCategory(req,nameValue,&usr)
+
+		if err2 != nil {
+			log.Errorf(ctx, "category remove err: %v", err)
+			http.Error(res, err.Error(), 500)
+			http.Redirect(res, req, "/new/category", 302)
+			return
+
+		}
+	}
+
+	http.Redirect(res, req, "/new/category", 302)
 }

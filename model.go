@@ -15,6 +15,7 @@ type SessionData struct {
 }
 
 
+
 type Expenses struct {
 	CategoryName string
 	Amount float64
@@ -27,4 +28,10 @@ type Expenses struct {
 type Category struct {
 	Name        string
 	Description string
+}
+
+
+type CategoryData struct {
+	User
+	Categories []Category
 }

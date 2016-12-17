@@ -19,7 +19,7 @@
             <ul class = "sidebar">
                 <div class="profile">
                     <div class="ico"></div>
-
+                    <div class="profileName"><p>{{.UserName}}</p></div>
                     <div class="clearfix"></div>
                 </div>
 
@@ -35,12 +35,22 @@
 
 
         <div class="user usr">
-            <h1>Nowy</h1>
+            <h1>Nowy/Aktualizuj</h1>
             <form method="post" action="/category/create">
-                <input type="text" name="name" placeholder="Podaj podaje nazwę"/>
+                <input type="text" name="name" placeholder="Podaj nazwę"/>
                 <input type="text" name="description" placeholder="Opis"/>
 
                 <button type="submit">Zapisz</button>
+            </form>
+
+        </div>
+
+        <div class="user usr">
+            <h1>Usuń</h1>
+            <form method="post" action="/category/delete">
+                <input type="text" name="delname" placeholder="Podaj nazwę"/>
+
+                <button type="submit">Usuń</button>
             </form>
 
         </div>
@@ -58,7 +68,7 @@
                     </thead>
 
                     <tbody>
-                    {{range .}}
+                    {{range .Categories}}
                         <tr>
                             <td>{{ .Name}}</td>
                             <td>{{ .Description}}</td>

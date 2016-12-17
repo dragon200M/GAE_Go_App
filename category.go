@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
+	"google.golang.org/appengine/log"
 
 )
 
@@ -16,7 +17,7 @@ func putCategory(req *http.Request, usr *User, cat *Category) error {
 
 	usrKey := datastore.NewKey(ctx, userKey, usr.UserName, 0, nil)
 
-	key := datastore.NewIncompleteKey(ctx, categoryKey, usrKey)
+	key := datastore.NewKey(ctx, categoryKey,cat.Name,0,usrKey)
 	_, err := datastore.Put(ctx, key, cat)
 
 	return err
@@ -41,5 +42,33 @@ func getCategory(req *http.Request, usr *User)([]Category, error){
 	return cat , err
 
 
+
+}
+
+
+func delCategory(req *http.Request, catName string,usr *User) error{
+	ctx := appengine.NewContext(req)
+
+	var cat []Category
+
+	query :=datastore.NewQuery(categoryKey).Filter("Name =", catName)
+
+	usrK :=datastore.NewKey(ctx, userKey,usr.UserName,0,nil)
+	query = query.Ancestor(usrK)
+
+	key, err := query.GetAll(ctx, &cat)
+
+	if err != nil{
+		log.Errorf(ctx,"%v",err)
+		return err
+	}
+
+	if len(key)> 0{
+		err = datastore.Delete(ctx, key[0])
+		return err
+	}
+
+
+	return nil
 
 }

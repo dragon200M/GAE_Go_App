@@ -24,5 +24,6 @@ func init() {
 
 	router.GET("/new/category", addCategoryForm)
 	router.POST("/category/create", newCategory)
+	router.POST("/category/delete",deleteCategory)
 
 }
