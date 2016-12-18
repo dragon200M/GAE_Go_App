@@ -16,19 +16,25 @@ body{
     
 }
 
-#form-group{
+.form-group{
     background-color: #fafafa;
     margin: 15px;
     padding: 10px;
     border: 1px solid #b1b1b1;
     border-radius: 4px;
-    width:622px;
+
     -webkit-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
     -moz-box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
     box-shadow: 7px 7px 26px -8px rgba(105,105,105,1);
     
     
 }
+
+.exp{
+    width:622px;
+}
+
+
 
 
 

@@ -226,9 +226,10 @@ func newExpenses(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 
 
-	nameValue := req.FormValue("amount")
+	amLen := req.FormValue("amount")
+	catLen := req.FormValue("category")
 
-	if len(nameValue) > 0{
+	if len(amLen) > 0 && len(catLen) > 0{
 
 
 
@@ -240,7 +241,7 @@ func newExpenses(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 			var expData ExpensesData
 			expData.Categories, _ = getCategory(req,&usr)
 			expData.BadNumberFormat = "Zły format kwoty"
-
+			expData.Expenses, _= getExpenses(req,&usr)
 			t.ExecuteTemplate(res,"newExpense.html",expData)
 			return
 		}
@@ -299,6 +300,36 @@ func addExpenseForm(res http.ResponseWriter, req *http.Request, _ httprouter.Par
 		http.Redirect(res, req, "/new/login", 302)
 		return
 	}
+
+}
+
+
+
+
+func summaryPage(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	ctx := appengine.NewContext(req)
+
+	var usr User
+	memitem , err := getSession(req)
+
+
+	if err != nil {
+		log.Infof(ctx, "You must be logged in")
+		//http.Error(res, "You must be logged in", http.StatusForbidden)
+		http.Redirect(res, req, "/new/login", 302)
+		return
+	}
+
+	json.Unmarshal(memitem.Value, &usr)
+
+	//if err == nil {
+
+
+		t.ExecuteTemplate(res,"summary.html",&usr)
+
+	//}
+
+
 
 }
 

@@ -30,6 +30,7 @@ func getExpenses(req *http.Request, usr *User)([]Expenses, error){
 
 	_, err := q.GetAll(ctx, &exp)
 
+
 	if err != nil{
 		return nil, err
 	}

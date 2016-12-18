@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dodaj Kategorię</title>
+    <title>Wydatki</title>
     <meta charset="utf-8"/>
     <link href="../public/style/style.css" rel="stylesheet" type="text/css">
     <link href="../public/style/addUser.css" rel="stylesheet" type="text/css">
@@ -26,13 +26,14 @@
                 <li><a href="/" class="siede-link">Start</a></li>
                     <li><a href="/new/expense" class="siede-link">Wydatki</a></li>
                     <li><a href="/new/category" class="siede-link">Kategoria</a></li>
-                    <li><a href="/" class="siede-link">Podsumowanie</a></li>
+                    <li><a href="/summary" class="siede-link">Podsumowanie</a></li>
                     <li><a href="/user/logout" class="siede-link">Wyloguj się</a></li>
 
             </ul>
 
          </nav>
-         <div id="form-group">
+        <p style = "color: red;">{{.BadNumberFormat}}</p>
+         <div class="form-group exp">
 
             <form method="post" action="/expense/create">
                 <table>
@@ -59,7 +60,7 @@
                             <td><input type="text" name="desc"/></td>
                         </tr>
 
-                         <p style = "color: red;">{{.BadNumberFormat}}</p>
+
 
                     </tbody>
 
@@ -69,10 +70,38 @@
 
         </div>
 
-        {{range .Expenses}}
-            <p>{{.Category}}</p>
-            <p>{{.Amount}}</p>
-        {{end}}
+        <div class="form-group exp">
+
+
+                <table id="expt">
+                    <thead>
+                        <tr class="none-border">
+                            <th>Kategoria</th>
+                            <th>Kwota</th>
+                            <th>Opis</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {{range .Expenses}}
+                        <tr>
+                            <td>{{.Category}}</td>
+                            <td>{{.Amount}}</td>
+                            <td>{{.Description}}</td>
+                        </tr>
+                    {{end}}
+
+
+                    </tbody>
+
+                </table>
+
+
+
+        </div>
+
+
 
     </div>
     

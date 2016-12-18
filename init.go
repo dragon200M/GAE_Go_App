@@ -29,4 +29,6 @@ func init() {
 	router.POST("/category/create", newCategory)
 	router.POST("/category/delete",deleteCategory)
 
+	router.GET("/summary", summaryPage)
+
 }
