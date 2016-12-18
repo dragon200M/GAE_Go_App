@@ -8,7 +8,7 @@
     
     
 }
-td{
+.table > td{
     max-width:180px;
     word-wrap: break-word;
 }

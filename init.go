@@ -23,6 +23,9 @@ func init() {
 	router.GET("/user/logout",logoutUser)
 
 	router.GET("/new/category", addCategoryForm)
+	router.GET("/new/expense", addExpenseForm)
+
+	router.POST("/expense/create", newExpenses)
 	router.POST("/category/create", newCategory)
 	router.POST("/category/delete",deleteCategory)
 

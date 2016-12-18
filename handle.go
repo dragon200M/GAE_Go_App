@@ -13,6 +13,7 @@ import (
 	"google.golang.org/appengine/memcache"
 	"time"
 	"strings"
+	"strconv"
 )
 
 func indexHandle(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -148,7 +149,8 @@ func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 		}
 
-		err = putCategory(req, &usr, &category)
+		err = category.putCategory(req,&usr)
+
 
 		if err != nil {
 			log.Errorf(ctx, "category adding err: %v", err)
@@ -156,6 +158,9 @@ func newCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 			return
 
 		}
+
+
+
 	}
 
 	http.Redirect(res, req, "/new/category", 302)
@@ -200,3 +205,100 @@ func deleteCategory(res http.ResponseWriter, req *http.Request, _ httprouter.Par
 
 	http.Redirect(res, req, "/new/category", 302)
 }
+
+
+func newExpenses(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+
+	ctx := appengine.NewContext(req)
+	memItem, err := getSession(req)
+
+	if err != nil {
+		log.Infof(ctx, "You must be logged in")
+
+
+		return
+	}
+
+
+
+	var usr User
+	json.Unmarshal(memItem.Value, &usr)
+
+
+
+	nameValue := req.FormValue("amount")
+
+	if len(nameValue) > 0{
+
+
+
+
+
+		amount ,err := strconv.ParseFloat(req.FormValue("amount"),64)
+
+		if err != nil{
+			var expData ExpensesData
+			expData.Categories, _ = getCategory(req,&usr)
+			expData.BadNumberFormat = "Zły format kwoty"
+
+			t.ExecuteTemplate(res,"newExpense.html",expData)
+			return
+		}
+
+		exp := Expenses{
+			Category: req.FormValue("category"),
+			Amount: amount,
+			Description: req.FormValue("desc"),
+		}
+
+		err = exp.putExpenses(req,exp.Category,&usr)
+
+
+		if err != nil {
+			log.Errorf(ctx, "expense adding err: %v", err)
+			http.Error(res, err.Error(), 500)
+			return
+
+		}
+
+
+
+	}
+
+	http.Redirect(res, req, "/new/expense", 302)
+
+
+
+}
+
+
+
+func addExpenseForm(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	ctx := appengine.NewContext(req)
+	var expData ExpensesData
+	var usr User
+	memitem , err := getSession(req)
+
+
+
+	json.Unmarshal(memitem.Value, &usr)
+
+	expData.User = usr
+	expData.Categories,_= getCategory(req,&usr)
+
+	if err == nil {
+
+
+		t.ExecuteTemplate(res,"newExpense.html", expData)
+
+	}
+
+	if err != nil {
+		log.Infof(ctx, "You must be logged in")
+		//http.Error(res, "You must be logged in", http.StatusForbidden)
+		http.Redirect(res, req, "/new/login", 302)
+		return
+	}
+
+}
+

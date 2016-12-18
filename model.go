@@ -1,12 +1,13 @@
 package app
 
-import "time"
 
-type User struct {
-	Email    string
-	UserName string `datastore:"-"`
-	Password string `json:"-"`
-}
+import (
+	"net/http"
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
+
+	"time"
+)
 
 type SessionData struct {
 	User
@@ -16,8 +17,66 @@ type SessionData struct {
 
 
 
+
+
+//User
+type User struct {
+	Email    string
+	UserName string `datastore:"-"`
+	Password string `json:"-"`
+}
+
+
+func (usr *User) key(req *http.Request) *datastore.Key{
+
+	ctx := appengine.NewContext(req)
+
+	key := datastore.NewKey(ctx, userKey,usr.UserName,0,nil)
+
+
+	return key
+
+}
+//end User
+
+
+
+
+
+//Category
+type Category struct {
+	Name        string
+	Description string
+
+}
+
+
+func (cat *Category) key(req *http.Request, usr *User) *datastore.Key{
+
+	ctx := appengine.NewContext(req)
+
+	key := datastore.NewKey(ctx, categoryKey,cat.Name,0,usr.key(req))
+
+
+	return key
+
+}
+
+//end Category
+
+
+
+type CategoryData struct {
+	User
+	Categories []Category
+}
+
+
+
+//Expenses
+
 type Expenses struct {
-	CategoryName string
+	Category string
 	Amount float64
 	Description string
 	Date time.Time
@@ -25,13 +84,22 @@ type Expenses struct {
 }
 
 
-type Category struct {
-	Name        string
-	Description string
+func (exp *Expenses) key(req *http.Request, cat string, usr *User) *datastore.Key{
+	ctx := appengine.NewContext(req)
+
+	//catKey := cat.key(req,usr)
+	catKey,_ := getCategoryKeyByName(req,usr,cat)
+
+	key:= datastore.NewIncompleteKey(ctx,expensesKey,catKey)
+
+	return key
 }
+//end Expenses
 
 
-type CategoryData struct {
+type ExpensesData struct{
 	User
 	Categories []Category
+	Expenses
+	BadNumberFormat string
 }

@@ -33,8 +33,9 @@ func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	}
 
-	key := datastore.NewKey(ctx, userKey, usr.UserName, 0, nil)
+	//key := datastore.NewKey(ctx, userKey, usr.UserName, 0, nil)
 
+	key:=usr.key(req)
 	key, err = datastore.Put(ctx, key, &usr)
 
 	if err != nil {
@@ -48,3 +49,11 @@ func newUser(res http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	http.Redirect(res, req, "/", 302)
 
 }
+
+
+
+
+
+
+
+

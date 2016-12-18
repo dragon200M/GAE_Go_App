@@ -31,58 +31,44 @@
 
             </ul>
 
-    </nav>
+         </nav>
+         <div id="form-group">
 
-
-        <div class="user usr">
-            <h1>Nowy/Aktualizuj</h1>
-            <form method="post" action="/category/create">
-                <input type="text" name="name" placeholder="Podaj nazwę"/>
-                <input type="text" name="description" placeholder="Opis"/>
-
-                <button type="submit">Zapisz</button>
-            </form>
-
-        </div>
-
-        <div class="user usr">
-            <h1>Usuń</h1>
-            <form method="post" action="/category/delete">
-                <input type="text" name="delname" placeholder="Podaj nazwę"/>
-
-                <button type="submit">Usuń</button>
-            </form>
-
-        </div>
-
-         <div class="table usr">
-
+            <form method="post" action="/expense/create">
                 <table>
                     <thead>
-                        <tr >
+                        <tr class="none-border">
                             <th>Kategoria</th>
+                            <th>Kwota</th>
                             <th>Opis</th>
-
 
                         </tr>
                     </thead>
 
                     <tbody>
-                    {{range .Categories}}
                         <tr>
-                            <td>{{ .Name}}</td>
-                            <td>{{ .Description}}</td>
-                        </tr>
-                    {{end}}
+                            <td>
+                                <select name="category">
+                                    {{range .Categories}}
+                                    <option>{{.Name}}</option>
+                                    {{end}}
+                                </select>
+                            </td>
+                            <td><input type="text" name="amount"/></td>
 
+                            <td><input type="text" name="desc"/></td>
+                        </tr>
+
+                         <p style = "color: red;">{{.BadNumberFormat}}</p>
 
                     </tbody>
 
                 </table>
-
+                    <button type="submit">Zapisz</button>
+            </form>
 
         </div>
-        <div class="clearfix"></div>
+
 
 
     </div>
