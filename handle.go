@@ -285,7 +285,7 @@ func addExpenseForm(res http.ResponseWriter, req *http.Request, _ httprouter.Par
 
 	expData.User = usr
 	expData.Categories,_= getCategory(req,&usr)
-
+	expData.Expenses ,_ = getExpenses(req,&usr)
 	if err == nil {
 
 

@@ -21,4 +21,24 @@ func (exp *Expenses) putExpenses(req *http.Request, cat string, usr *User) error
 	return err
 }
 
+func getExpenses(req *http.Request, usr *User)([]Expenses, error){
+	ctx := appengine.NewContext(req)
+
+
+	var exp []Expenses
+	q  := datastore.NewQuery(expensesKey).Ancestor(usr.key(req))
+
+	_, err := q.GetAll(ctx, &exp)
+
+	if err != nil{
+		return nil, err
+	}
+
+
+	return exp , err
+
+
+
+}
+
 

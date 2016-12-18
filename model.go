@@ -99,7 +99,7 @@ func (exp *Expenses) key(req *http.Request, cat string, usr *User) *datastore.Ke
 
 type ExpensesData struct{
 	User
-	Categories []Category
-	Expenses
+	Categories 	[]Category
+	Expenses 	[]Expenses
 	BadNumberFormat string
 }

@@ -69,7 +69,10 @@
 
         </div>
 
-
+        {{range .Expenses}}
+            <p>{{.Category}}</p>
+            <p>{{.Amount}}</p>
+        {{end}}
 
     </div>
     
