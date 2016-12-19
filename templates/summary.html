@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,61 +10,60 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
 </head>
 <body>
-    
-    <div id="container">
 
-        <div class="form-group">
-        
-                <table class="twidth">
-                 {{range .Summary}}
-                   <thead>
-                        <tr>
-                        <td>{{.Month}}</td>
-                            <td>Suma: {{.MonthSum}}</td>
-                      </tr>
+<div id="container">
 
-                   </thead>
-                    <tbody>
-                     {{range .CatSum}}
+    <div class="form-group">
 
-                    <tr>
-                        <td>{{.Name}}</td>
-                        <td>{{.Sum}}</td>
-                    </tr>
+        <table class="twidth">
+            {{range .Summary}}
+            <thead>
+            <tr>
+                <td>{{.Month}}</td>
+                <td>Suma: {{.MonthSum}}</td>
+            </tr>
+
+            </thead>
+            <tbody>
+            {{range .CatSum}}
+
+            <tr>
+                <td>{{.Name}}</td>
+                <td>{{.Sum}}</td>
+            </tr>
 
 
+            {{end}}
+            </tbody>
 
-                     {{end}}
-                     </tbody>
+            {{end}}
 
-                {{end}}
+        </table>
 
-                </table>
-                
-        
-        </div>
 
-        <nav class = "sidebarContainer">
+    </div>
 
-            <ul class = "sidebar">
-                <div class="profile">
-                    <div class="ico"></div>
-                    <div class="profileName"><p>{{.UserName}}</p></div>
-                    <div class="clearfix"></div>
-                </div>
+    <nav class="sidebarContainer">
 
-                <li><a href="/" >Start</a></li>
+        <ul class="sidebar">
+            <div class="profile">
+                <div class="ico"></div>
+                <div class="profileName"><p>{{.UserName}}</p></div>
+                <div class="clearfix"></div>
+            </div>
 
-                    <li><a href="/new/expense" >Wydatki</a></li>
-                    <li><a href="/new/category" >Kategoria</a></li>
-                    <li><a href="/summary" >Podsumowanie</a></li>
-                    <li><a href="/user/logout" >Wyloguj się</a></li>
+            <li><a href="/">Start</a></li>
 
-            </ul>
+            <li><a href="/new/expense">Wydatki</a></li>
+            <li><a href="/new/category">Kategoria</a></li>
+            <li><a href="/summary">Podsumowanie</a></li>
+            <li><a href="/user/logout">Wyloguj się</a></li>
+
+        </ul>
 
     </nav>
-    </div>
-    
+</div>
+
 </body>
 
 </html>

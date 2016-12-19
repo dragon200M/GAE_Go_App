@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,82 +10,82 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Lato" rel="stylesheet">
 </head>
 <body>
-    
-    <div id="container">
 
-         <nav class = "sidebarContainer">
+<div id="container">
 
-            <ul class = "sidebar">
-                <div class="profile">
-                    <div class="ico"></div>
-                    <div class="profileName"><p>{{.UserName}}</p></div>
-                    <div class="clearfix"></div>
-                </div>
+    <nav class="sidebarContainer">
 
-                <li><a href="/" class="siede-link">Start</a></li>
-                    <li><a href="/new/expense" class="siede-link">Wydatki</a></li>
-                    <li><a href="/new/category" class="siede-link">Kategoria</a></li>
-                    <li><a href="/summary" class="siede-link">Podsumowanie</a></li>
-                    <li><a href="/user/logout" class="siede-link">Wyloguj się</a></li>
+        <ul class="sidebar">
+            <div class="profile">
+                <div class="ico"></div>
+                <div class="profileName"><p>{{.UserName}}</p></div>
+                <div class="clearfix"></div>
+            </div>
 
-            </ul>
+            <li><a href="/" class="siede-link">Start</a></li>
+            <li><a href="/new/expense" class="siede-link">Wydatki</a></li>
+            <li><a href="/new/category" class="siede-link">Kategoria</a></li>
+            <li><a href="/summary" class="siede-link">Podsumowanie</a></li>
+            <li><a href="/user/logout" class="siede-link">Wyloguj się</a></li>
+
+        </ul>
 
     </nav>
 
 
-        <div class="user usr">
-            <h1>Nowy/Aktualizuj</h1>
-            <form method="post" action="/category/create">
-                <input type="text" name="name" placeholder="Podaj nazwę"/>
-                <input type="text" name="description" placeholder="Opis"/>
+    <div class="user usr">
+        <h1>Nowy/Aktualizuj</h1>
+        <form method="post" action="/category/create">
+            <input type="text" name="name" placeholder="Podaj nazwę"/>
+            <input type="text" name="description" placeholder="Opis"/>
 
-                <button type="submit">Zapisz</button>
-            </form>
+            <button type="submit">Zapisz</button>
+        </form>
 
-        </div>
+    </div>
 
-        <div class="user usr">
-            <h1>Usuń</h1>
-            <form method="post" action="/category/delete">
-                <input type="text" name="delname" placeholder="Podaj nazwę"/>
+    <div class="user usr">
+        <h1>Usuń</h1>
+        <form method="post" action="/category/delete">
+            <input type="text" name="delname" placeholder="Podaj nazwę"/>
 
-                <button type="submit">Usuń</button>
-            </form>
+            <button type="submit">Usuń</button>
+        </form>
 
-        </div>
+    </div>
 
-         <div class="table usr">
+    <div class="table usr">
 
-                <table>
-                    <thead>
-                        <tr >
-                            <th>Kategoria</th>
-                            <th>Opis</th>
-
-
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    {{range .Categories}}
-                        <tr>
-                            <td>{{ .Name}}</td>
-                            <td>{{ .Description}}</td>
-                        </tr>
-                    {{end}}
+        <table>
+            <thead>
+            <tr>
+                <th>Kategoria</th>
+                <th>Opis</th>
 
 
-                    </tbody>
+            </tr>
+            </thead>
 
-                </table>
+            <tbody>
+            {{range .Categories}}
+            <tr>
+                <td>{{ .Name}}</td>
+                <td>{{ .Description}}</td>
+            </tr>
+            {{end}}
 
 
-        </div>
-        <div class="clearfix"></div>
+            </tbody>
+
+        </table>
 
 
     </div>
-    
+    <div class="clearfix"></div>
+
+
+</div>
+
 </body>
 
 </html>

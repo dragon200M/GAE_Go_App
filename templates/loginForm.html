@@ -1,39 +1,39 @@
 {{template "header"}}
 <body>
-    
-    <div id="container">
 
-        <nav class = "sidebarContainer">
+<div id="container">
 
-            <ul class = "sidebar">
-                <div class="profile">
-                    <div class="ico"></div>
-                    <div class="clearfix"></div>
-                </div>
+    <nav class="sidebarContainer">
 
-                <li><a href="/" class="siede-link">Start</a></li>
-                    <li><a href="/new/adduser" class="siede-link">Załóż konto</a></li>
-                    <li><a href="/new/login" class="siede-link">Logowanie</a></li>
+        <ul class="sidebar">
+            <div class="profile">
+                <div class="ico"></div>
+                <div class="clearfix"></div>
+            </div>
 
-            </ul>
+            <li><a href="/" class="siede-link">Start</a></li>
+            <li><a href="/new/adduser" class="siede-link">Załóż konto</a></li>
+            <li><a href="/new/login" class="siede-link">Logowanie</a></li>
 
-        </nav>
+        </ul>
 
-        <div class="user usr">
-            <h1>Logowanie</h1>
-            <form method="post" action="/user/login">
-                
-                <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
-                <input type="password" name="password" placeholder="Podaj hasło"/>
-                
-                
-                <button type="submit">Login</button>
-            </form>
-        
-        </div>
-    
+    </nav>
+
+    <div class="user usr">
+        <h1>Logowanie</h1>
+        <form method="post" action="/user/login">
+
+            <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
+            <input type="password" name="password" placeholder="Podaj hasło"/>
+
+
+            <button type="submit">Login</button>
+        </form>
+
     </div>
-    
+
+</div>
+
 </body>
 
 </html>

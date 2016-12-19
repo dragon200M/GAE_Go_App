@@ -10,41 +10,41 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-    
-    <div id="container">
 
-         <div class = "sidebarContainer">
+<div id="container">
 
-            <ul class = "sidebar">
-                <div class="profile">
-                    <div class="ico"></div>
-                    <div class="clearfix"></div>
-                </div>
+    <div class="sidebarContainer">
 
-                    <li><a href="/" >Start</a></li>
-                    <li><a href="/new/login" >Logowanie</a></li>
+        <ul class="sidebar">
+            <div class="profile">
+                <div class="ico"></div>
+                <div class="clearfix"></div>
+            </div>
 
-            </ul>
+            <li><a href="/">Start</a></li>
+            <li><a href="/new/login">Logowanie</a></li>
 
-        </div>
+        </ul>
 
-
-        <div class="user usr">
-            <h1>Nowy użytkownik</h1>
-            <form method="post" action="/user/create">
-
-                <input type="text" name="email" placeholder="Podaj email"/>
-                <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
-                <input type="password" name="password" placeholder="Podaj hasło"/>
-
-                
-                <button type="submit">Nowy</button>
-            </form>
-        
-        </div>
-    
     </div>
-    
+
+
+    <div class="user usr">
+        <h1>Nowy użytkownik</h1>
+        <form method="post" action="/user/create">
+
+            <input type="text" name="email" placeholder="Podaj email"/>
+            <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
+            <input type="password" name="password" placeholder="Podaj hasło"/>
+
+
+            <button type="submit">Nowy</button>
+        </form>
+
+    </div>
+
+</div>
+
 </body>
 
 </html>

@@ -2,48 +2,47 @@
 
 <body>
 
-    <div id="container">
+<div id="container">
 
-            <div class="clock">
-                <div id="Date"></div>
-                <ul>
-                    <li id="hours"></li>
-                    <li id="point">:</li>
-                    <li id="min"></li>
-                    <li id="point">:</li>
-                    <li id="sec"></li>
-                </ul>
+    <div class="clock">
+        <div id="Date"></div>
+        <ul>
+            <li id="hours"></li>
+            <li id="point">:</li>
+            <li id="min"></li>
+            <li id="point">:</li>
+            <li id="sec"></li>
+        </ul>
+    </div>
+
+
+    <nav class="sidebarContainer">
+
+        <ul class="sidebar">
+            <div class="profile">
+                <div class="ico"></div>
+                {{if .LoggedIn}}
+                <div class="profileName"><p>{{.UserName}}</p></div>
+                {{end}}
+                <div class="clearfix"></div>
             </div>
 
-
-
-        <nav class = "sidebarContainer">
-
-            <ul class = "sidebar">
-                <div class="profile">
-                    <div class="ico"></div>
-                    {{if .LoggedIn}}
-                    <div class="profileName"><p>{{.UserName}}</p></div>
-                    {{end}}
-                    <div class="clearfix"></div>
-                </div>
-
-                <li><a href="/" >Start</a></li>
-                {{if .LoggedIn}}
-                    <li><a href="/new/expense" >Wydatki</a></li>
-                    <li><a href="/new/category" >Kategoria</a></li>
-                    <li><a href="/summary" >Podsumowanie</a></li>
-                    <li><a href="/user/logout" >Wyloguj się</a></li>
-                {{else}}
-                    <li><a href="/new/adduser" >Załóż konto</a></li>
-                    <li><a href="/new/login" >Logowanie</a></li>
-                {{end}}
-            </ul>
+            <li><a href="/">Start</a></li>
+            {{if .LoggedIn}}
+            <li><a href="/new/expense">Wydatki</a></li>
+            <li><a href="/new/category">Kategoria</a></li>
+            <li><a href="/summary">Podsumowanie</a></li>
+            <li><a href="/user/logout">Wyloguj się</a></li>
+            {{else}}
+            <li><a href="/new/adduser">Załóż konto</a></li>
+            <li><a href="/new/login">Logowanie</a></li>
+            {{end}}
+        </ul>
 
     </nav>
 
-    </div>
-    <script src="../public/script/script.js" type="text/javascript"></script>
+</div>
+<script src="../public/script/script.js" type="text/javascript"></script>
 </body>
 
 </html>
