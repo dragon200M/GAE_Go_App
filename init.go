@@ -32,4 +32,7 @@ func init() {
 	router.GET("/summary", summaryPage)
 	router.POST("/user/check",userNameExists)
 
+	router.GET("/serve/time",serveTime)
+
+
 }
