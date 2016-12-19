@@ -30,5 +30,6 @@ func init() {
 	router.POST("/category/delete",deleteCategory)
 
 	router.GET("/summary", summaryPage)
+	router.POST("/user/check",userNameExists)
 
 }

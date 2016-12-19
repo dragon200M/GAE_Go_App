@@ -31,11 +31,14 @@
 
     <div class="user usr">
         <h1>Nowy użytkownik</h1>
-        <form method="post" action="/user/create">
+        <form id="form" method="post" action="/user/create">
 
             <input type="text" name="email" placeholder="Podaj email"/>
-            <input type="text" name="user" placeholder="Podaj nazwa użytkownika"/>
-            <input type="password" name="password" placeholder="Podaj hasło"/>
+            <p class="form-field-err "></p>
+            <input type="text" name="user" id="userN" placeholder="Podaj nazwa użytkownika"/>
+            <p class="form-field-err " id="username-err"></p>
+            <input type="password" name="password" id="passwordN" placeholder="Podaj hasło"/>
+            <p class="form-field-err" id="password-err" style="margin-top:0px; margin-bottom:0px;"></p>
 
 
             <button type="submit">Nowy</button>
@@ -44,6 +47,70 @@
     </div>
 
 </div>
+
+<script>
+
+        $(document).ready(function(){
+
+            $("#userN").on('input',function(){
+
+                var u =  $("#userN").val();
+
+                $ .ajax({
+                    type    : "POST",
+                    url     : "/user/check",
+                    data    : u,
+                     success: function(ret) {
+                            if (ret === "true"){
+
+                                $("#username-err").addClass("er");
+                                $("#username-err").html("Nazwa użytkownika już zajęta");
+                            }
+                            if (ret === "false" && u.length > 0 ){
+
+                                $("#username-err").removeClass("er");
+                                $("#username-err").html("");
+                            }
+                          },
+                     complete: function() {
+
+                         },
+                     error: function(jqXHR, errorText, errorThrown) {
+
+                      }
+
+
+                });
+
+
+            });
+
+            $('#form').submit(function() {
+                if ($.trim($("#userN").val()) === "" || $.trim($("#passwordN").val()) === "") {
+
+                        var u =  $("#userN").val();
+                       if (u.length == 0 ){
+                        $("#username-err").addClass("er");
+                        $("#username-err").html("Podaj nazwę użytkownika");
+                       }
+
+                        $("#password-err").addClass("er");
+                        $("#password-err").html("Podaj hasło");
+                 return false;
+             }
+            });
+
+
+
+
+        });
+
+
+
+
+
+</script>
+
 
 </body>
 

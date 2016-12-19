@@ -48,3 +48,15 @@ h1{
     font-size: 25px;
     text-align: center;
 }
+
+.form-field-err {
+
+    color: red;
+    font-size: 12px;
+
+}
+
+.er {
+    margin-top:0px;
+    margin-bottom:0px;
+}
