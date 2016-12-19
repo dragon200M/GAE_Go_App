@@ -7,6 +7,7 @@ import (
 	"google.golang.org/appengine/datastore"
 
 	"time"
+
 )
 
 type SessionData struct {
@@ -79,6 +80,7 @@ type Expenses struct {
 	Category string
 	Amount float64
 	Description string
+	Month time.Month
 	Date time.Time
 
 }
@@ -102,4 +104,22 @@ type ExpensesData struct{
 	Categories 	[]Category
 	Expenses 	[]Expenses
 	BadNumberFormat string
+}
+
+
+type Summary struct{
+	Month string
+	CatSum []CatSum
+	MonthSum string
+}
+
+type CatSum struct {
+	Name string
+	Sum string
+}
+
+type SummaryData struct {
+	User
+	Summary []Summary
+	Len int
 }

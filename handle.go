@@ -246,10 +246,13 @@ func newExpenses(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 			return
 		}
 
+
 		exp := Expenses{
 			Category: req.FormValue("category"),
 			Amount: amount,
 			Description: req.FormValue("desc"),
+			Month: time.Now().Month(),
+			Date: time.Now(),
 		}
 
 		err = exp.putExpenses(req,exp.Category,&usr)
@@ -278,11 +281,14 @@ func addExpenseForm(res http.ResponseWriter, req *http.Request, _ httprouter.Par
 	ctx := appengine.NewContext(req)
 	var expData ExpensesData
 	var usr User
+
+
 	memitem , err := getSession(req)
 
 
 
 	json.Unmarshal(memitem.Value, &usr)
+
 
 	expData.User = usr
 	expData.Categories,_= getCategory(req,&usr)
@@ -310,6 +316,7 @@ func summaryPage(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 	ctx := appengine.NewContext(req)
 
 	var usr User
+	var sumData SummaryData
 	memitem , err := getSession(req)
 
 
@@ -322,12 +329,16 @@ func summaryPage(res http.ResponseWriter, req *http.Request, _ httprouter.Params
 
 	json.Unmarshal(memitem.Value, &usr)
 
-	//if err == nil {
+	s :=summary(req,&usr)
+	sumData.Summary = s
+	sumData.User = usr
+	sumData.Len = len(s)
 
 
-		t.ExecuteTemplate(res,"summary.html",&usr)
 
-	//}
+		t.ExecuteTemplate(res,"summary.html",sumData)
+
+
 
 
 

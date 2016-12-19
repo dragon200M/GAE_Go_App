@@ -17,59 +17,29 @@
         <div class="form-group">
         
                 <table class="twidth">
-                    <thead>
-                        <tr >
-                            <th>Id</th>
-                            <th>Kategoria</th>
-                            <th>Okres</th>
-                            <th>Suma</th>
-                            
-                        
-                        </tr>
-                    </thead>        
-                
-                    <tbody>
+                 {{range .Summary}}
+                   <thead>
                         <tr>
-                            <td>1</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                         <tr>
-                            <td>2</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                         <tr>
-                            <td>3</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                         <tr>
-                            <td>1</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                         <tr>
-                            <td>2</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                         <tr>
-                            <td>3</td>
-                            <td>Chemia</td>
-                            <td>Grudzień</td>
-                            <td>100.0</td>
-                        </tr>
-                        
-                    
-                    
-                    </tbody>
-                
+                        <td>{{.Month}}</td>
+                            <td>Suma: {{.MonthSum}}</td>
+                      </tr>
+
+                   </thead>
+                    <tbody>
+                     {{range .CatSum}}
+
+                    <tr>
+                        <td>{{.Name}}</td>
+                        <td>{{.Sum}}</td>
+                    </tr>
+
+
+
+                     {{end}}
+                     </tbody>
+
+                {{end}}
+
                 </table>
                 
         
